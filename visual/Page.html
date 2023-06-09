@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebServer</title>        
+    </head>
+    <body bgcolor="#00FFFF">
+        <table id = "ContentTable" border="3" width="85%">
+            <tr bgcolor="blue">
+                <th align="center" onclick="Sorter(0,false)">Name</th>
+                <th class="center" align="center" onclick="sortTable(1,false)">Size</th>
+                <th class="center" align="center" onclick="sortTable(2,false)">Date</th>
+            </tr>
+             <!--Marc-->
+        </table>
+
+        <script>
+            function Sorter(n,b)
+            {
+                let table = document.getElementById("ContentTable");
+
+                let d = "asc";
+
+                let condition = true;
+                let cont;
+                let counter = 0;
+                let i;         
+                let x;
+                let xfan;
+                let y;
+                let yfan;
+                let rows;
+
+                while(condition)
+                {
+                    condition = false;
+                    rows = table.rows
+                    for(i=2;i < (rows.length-1);i++)
+                    {
+                        posible = false;
+                        x = rows[i].getElementsByTagName("TD")[n];
+                        y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                        
+                        if(n==0)
+                        {
+                            //obtenemos la sintaxis html de x,y
+                            xfan = x.innerHTML.toLowerCase();
+                            yfan = y.innerHTML.toLowerCase();
+                        }
+                        else if(n==1)
+                        {
+                            let xLength = x.innerHTML === "-" ? "-1" : x.innerHTML.substring(0, x.innerHTML.length - 3);
+                            let yLength = y.innerHTML === "-" ? "-1" : y.innerHTML.substring(0, y.innerHTML.length - 3);
+                            xfan = parseInt(xLength);
+                            yfan = parseInt(yLength);
+
+                            if(x.innerHTML !== "-")
+                            {
+                                let x_ = x.innerHTML.substring(x.innerHTML.length-2);
+                                if (x_ === "mb") 
+                                {
+                                    xfan *= 1024;
+                                }    
+                                if (x_ === "gb") 
+                                {    
+                                    xfan *= (1024 * 1024);
+                                } 
+                            }
+                            if(y.innerHTML !== "-")
+                            {
+                                let y_ = y.innerHTML.substring(y.innerHTML-2);
+                                if(y_ === "mb")
+                                {
+                                    yfan *=1024;
+                                }
+                                if(y_ === "gb")
+                                {
+                                    yfan *= (1024*1024);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            xComp = new Date(x.innerHTML);
+                            yComp = new Date(y.innerHTML);   
+                        }
+                        if((d === "asc" && xfan > yfan)||(dir === "desc" && xfan < yfan))
+                        {
+                            cont = true;
+                            break;     
+                        } 
+                    }
+                    if(cont)
+                    {
+                        
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        condition = true;
+                        counter++;
+                    }
+                    else if(!b && counter === 0 && d ==="asc")
+                    {
+                        d = "desc";
+                        condition = true;
+                    }
+                }
+            }
+            document.addEventListener('DOMContentLoaded', () => sortTable(0, true));
+        </script>
+    </body>
+</html>

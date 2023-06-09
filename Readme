@@ -1,0 +1,2 @@
+El proyecto cuenta con las funciones básicas para una nota de 3 puntos, o eso espero.
+Para compilarlo, abrir la consola en la carpeta ligic y ejecutar: gcc Program.c -lcurl y posteriormente: ./a.out <puerto> <dirección>
