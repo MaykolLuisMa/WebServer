@@ -243,7 +243,7 @@ char **LoadPage()
 
 void BuildBackFolder(char *CompletePage,char *ServerPath,char *ServingDirectory)
 {
-    printf("BuildBackFolder\n");
+
     //Indico la creacion de una nueva fila en la pagina
     strcat(CompletePage, "<td>");
     strcat(CompletePage, "<a href=\"");
@@ -256,7 +256,7 @@ void BuildBackFolder(char *CompletePage,char *ServerPath,char *ServingDirectory)
 
     //Codifico nuevamente el URL y lo copio a la pagina haciendo que la fila este asociada a este 
     char *codified = ToURL(browser);
-    printf("Codified %s\n",codified);
+    
     strcat(CompletePage,codified);
     strcat(CompletePage, "\">");
 
