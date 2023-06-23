@@ -25,18 +25,14 @@ void *ClientHandler(void *args)
     //Del mensaje recibido solo nos interesa la linea inicial que contiene el metodo de peticion,
     //el cual debe ser GET, ya que solo nos interesa la recuperacion de recursos y
     //el URL del recurso
-    char *RecuestMethod = malloc(200);
-    char *ResourceURL = malloc(200);
-    strcpy(RecuestMethod,MessegeComponents[0]);
-    strcpy(ResourceURL,MessegeComponents[1]);
 
 
-    if(RecuestMethod != NULL && strcmp(RecuestMethod, "GET") == 0 && ResourceURL != NULL)
+
+    if(MessegeComponents[0] != NULL && strcmp(MessegeComponents[0], "GET") == 0 && MessegeComponents[1] != NULL)
     {
         //Une la direccion del directorio y el URL para obtener la direccion a utilizar
-        char *ServerPath = GetServerPath(ResourceURL, ServingDirectory);
+        char *ServerPath = GetServerPath(MessegeComponents[1], ServingDirectory);
         
-
         int open = OpenPage(ServerPath, ServingDirectory, ConnectedSocked);
 
         if(open == 0)
